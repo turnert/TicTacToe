@@ -3,12 +3,15 @@ function GameBoard() {
     if (!(this instanceof GameBoard)) {
         return new GameBoard();
     }
-    var board = [new Array(3), new Array(3), new Array(3)];
+    var board = [new Array(3), new Array(3), new Array(3)],
+        constants = require('konphyg')(__dirname)('constants');
 
     function
 
     function threeInARow() {
-        board[1].
+        board[constants.middleRowIndex].forEach(function (middleSquare) {
+            
+        }
     }
 }
 
