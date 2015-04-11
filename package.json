@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/turnert/ticTacToe/issues"
   },
-  "homepage": "https://github.com/turnert/ticTacToe"
+  "homepage": "https://github.com/turnert/ticTacToe",
+  "dependencies": {
+    "konphyg": "~1.4.0"
+  }
 }
