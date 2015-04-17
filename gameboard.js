@@ -20,6 +20,27 @@ function GameBoard() {
         return emptySquares === 0;
     }
 
+    function isSquareEmpty(position) {
+        return board[position.x][position.y] === undefined;
+    }
+
+    function iterateOverRowElements(callback) {
+        board.forEach(function (row) {
+            row.forEach(function (rowElement) {
+                callback(rowElement);
+            });
+        });
+    }
+
+    function iterateOverColumnElements(callback) {
+        board.forEach(function (row, rowIndex) {
+            row.forEach(function (rowElement, columnIndex) {
+                var columnElement = board[columnIndex][rowIndex];
+                callback(columnElement);
+            });
+        });
+    }
+
     function claimSquare(player, position) {
         if (isValidMove(position)) {
             board[position.x][position.y] = player.letter;
@@ -33,19 +54,32 @@ function GameBoard() {
     }
 
     function isValidMove(position) {
-        return contains(position) && board[position.x][position.y] === undefined
+        return contains(position) && isSquareEmpty(position);
+    }
+
+    function checkRowsAndColumns() {
+        var foundWinningRow = false,
+            winningRowLetter = false,
+            winningColumnLetter = false;
+        board.forEach(function (row, rowIndex) {
+            var isWinningRow = false;
+            row.forEach(function (rowElement, columnIndex) {
+                var columnElement = board[]
+                winningRowLetter = winningRowLetter || rowElement
+            });
+        });
     }
 
     function winningRow() {
         var foundWinningRow = false,
             winningLetter = false;
         board.forEach(function (row) {
-            var isWinningRow = false;
+            var isWinningRow = true;
             row.forEach(function (columnElement) {
                 winningLetter = winningLetter || columnElement;
                 isWinningRow = winningLetter === columnElement;
             });
-            foundWinningRow = foundWinningRow || isWinningRow;
+            foundWinningRow = isWinningRow && (foundWinningRow || isWinningRow);
         });
         return foundWinningRow;
     }
