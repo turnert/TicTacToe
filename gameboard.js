@@ -1,60 +1,50 @@
-function GameBoard() {
+function GameBoard(Grid, Position, config) {
     // constructor guard.  Forces new usage, even if invoked
     if (!(this instanceof GameBoard)) {
         return new GameBoard(config);
     }
-    var board = [],
-        constants = require('konphyg')(__dirname)('constants'),
-        emptySquares = config.boardSize.numRows * config.boardSize.numColumns;
+    var constants = require('konphyg')(__dirname)('constants');
 
     function init() {
         var rowIndex = 0,
-            columnIndex = 0;
-
-        for(i = 0;, i < config.boardSize.numColumns) {
-            board.push(new Array[config.boardSize.numRows]);
-        }
-    }
-
-    function isBoardFull() {
-        return emptySquares === 0;
-    }
-
-    function isSquareEmpty(position) {
-        return board[position.x][position.y] === undefined;
-    }
-
-    function iterateOverRowElements(callback) {
-        board.forEach(function (row) {
-            row.forEach(function (rowElement) {
-                callback(rowElement);
-            });
-        });
-    }
-
-    function iterateOverColumnElements(callback) {
-        board.forEach(function (row, rowIndex) {
-            row.forEach(function (rowElement, columnIndex) {
-                var columnElement = board[columnIndex][rowIndex];
-                callback(columnElement);
-            });
-        });
+            columnIndex = 0,
+            board = new Grid(constants.boardSize.numRows, constants.boardSize.numColumns;
     }
 
     function claimSquare(player, position) {
-        if (isValidMove(position)) {
-            board[position.x][position.y] = player.letter;
-            emptySquares = emptySquares - 1;
+        board.set(position, player.symbol);
+    }
+
+    function isWinningRow(rowIndex) {
+        var columnIndex = board.minColumnIndex,
+            position, winningLetter = false,
+            currentLetter,
+            foundWinningRow;
+
+        for(; i < board.maxColumnIndex; i += 1) {
+            position = new Position(rowIndex, columnIndex);
+            currentLetter = board.get(postion);
+            winningLetter = winningLetter || currentLetter;
+            if (currentLetter !== winningLetter) {
+                foundWinningRow = false;
+            }
         }
     }
 
-    function contains(position) {
-        return 0 <= position.x && position.x <= config.boardSize.numRows &&
-            0 <= position.y && position.y <= config.boardSize.numColumns;
-    }
+    function isWinningColumn(columnIndex) {
+        var rowIndex = board.minRowIndex,
+            position, winnningLetter = false,
+            currentLetter,
+            foundWiningRow;
 
-    function isValidMove(position) {
-        return contains(position) && isSquareEmpty(position);
+        for(; i < board.maxRowIndex; i += 1) {
+            position = new Position(rowIndex, coulumnIndex);
+            currentLetter = board.get(position);
+            winningLetter = winningLetter || currentLetter;
+            if (currentLtter !== winningLetter) {
+                foundWinningColumn = false;
+            }
+        }
     }
 
     function checkRowsAndColumns() {
